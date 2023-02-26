@@ -1,0 +1,4 @@
+{
+    "terminal.integrated.cwd": "app",
+    "python.defaultInterpreterPath": "/workspaces/django-devcontainer/.venv/bin/python"
+}

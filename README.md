@@ -1,2 +1,2 @@
-# django-devcontainer
-A quick start base for Django development
+# Beast-Brawl-Royale
+Yes.
