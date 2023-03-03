@@ -14,7 +14,3 @@ It's already setup for the following:
 clone this repository and use it as a base for your own repository.  
 You will need to change the following:  
 - create .env.local file at root of project
-- .devcontainer/post-create.sh  
-    change `django-devcontainer` to your project name
-- .vscode/settings.json  
-    change `django-devcontainer` to your project name, in case VSCODE does not recognize the .venv created by poetry
