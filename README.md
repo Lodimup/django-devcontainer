@@ -1,4 +1,5 @@
 # Django Devcontainer Base Repository
+A ready to use devcontainer for Django development.
 This repository contains a base devcontainer for Django development.  
 It is intended to be used as a base for other repositories.  
 
@@ -6,6 +7,8 @@ It's already setup for the following:
 - postgresql
 - redis
 - celery
+- celery beat
+- whitenoise
 - auto load .env.local file
 - debugger
 - Makefile
