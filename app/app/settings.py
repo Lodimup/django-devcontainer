@@ -130,7 +130,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # Celery
 CELERY_BROKER_URL = env['DJ_CELERY_BROKER_URL']
 CELERY_RESULT_BACKEND = env['DJ_CELERY_RESULT_BACKEND']
-CELERY_INCLUDE = []
+CELERY_INCLUDE = []  # add 'app.tasks' here for auto task discovery
 
 # Cache
 CACHES = {
