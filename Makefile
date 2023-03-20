@@ -29,3 +29,8 @@ run-worker:
 run-beat:
 	cd app &&\
 	poetry run celery -A app beat -l INFO
+
+# Create superuser
+su:
+	cd app &&\
+	python manage.py createsuperuser
