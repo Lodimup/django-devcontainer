@@ -39,3 +39,16 @@ su:
 config-git:
 	git config --global --add safe.directory /workspace
 	git config core.fileMode false
+
+# Make requirements.txt
+req:
+	poetry export -f requirements.txt --output requirements.txt --without-hashes
+
+# Build, run docker
+docker: req docker-build docker-run
+
+docker-build:
+	docker build -t django-devcontainer .
+
+docker-run:
+	docker run --rm --env-file .env.local -p 8080:8000 django-devcontainer
