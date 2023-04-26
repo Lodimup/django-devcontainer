@@ -1,6 +1,11 @@
 all:
 	@echo "NO CAPES, eh no defaults!"
 
+# Start hypercorn
+start:
+	cd app &&\
+	hypercorn app.asgi:application --bind 0.0.0.0:8000
+
 # run without debug
 run:
 	cd app &&\
