@@ -27,7 +27,7 @@ SECRET_KEY = env.get('DJ_SECRET_KEY', 'not-safe-%u+@3$+4@)xozo4_-rv0wlk**5+l)((t
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env.get('DJ_DEBUG', False)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = env.get('DJ_ALLOWED_HOSTS', ['localhost'])
 
 
 # Application definition

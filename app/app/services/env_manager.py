@@ -16,6 +16,7 @@ load_envs = [
 
     'DJ_DEBUG',
     'DJ_SECRET_KEY',
+    'DJ_ALLOWED_HOSTS',
 ]
 
 env = {}
@@ -25,7 +26,7 @@ for i in load_envs:
     try:
         env[i] = os.environ[i]
     except KeyError as e:
-        if os.getenv('SKIP_ENV_CHECK').lower() == 'true':
+        if os.getenv('SKIP_ENV_CHECK', 'False').lower() == 'true':
             print(f"WARNING: Environment variable {i} not set")
         else:
             envs_notset.append(i)
@@ -34,5 +35,7 @@ if len(envs_notset) > 0:
     raise Exception(f"Environment variables not set: {envs_notset}")
 
 # Typecasts
-if hasattr(env, 'DJ_DEBUG'):
+if env.get('DJ_DEBUG') is not None:
     env['DJ_DEBUG'] = env['DJ_DEBUG'].lower() == 'true'
+if env.get('DJ_ALLOWED_HOSTS'):
+    env['DJ_ALLOWED_HOSTS'] = env['DJ_ALLOWED_HOSTS'].split(',')
