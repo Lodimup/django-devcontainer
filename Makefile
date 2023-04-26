@@ -39,5 +39,3 @@ su:
 config-git:
 	git config --global --add safe.directory /workspace
 	git config core.fileMode false
-	git config --global user.email "pumidol.l@gmail.com"
-	git config --global user.name "Pumidol"
