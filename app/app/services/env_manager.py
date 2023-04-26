@@ -25,10 +25,14 @@ for i in load_envs:
     try:
         env[i] = os.environ[i]
     except KeyError as e:
-        envs_notset.append(i)
+        if os.getenv('SKIP_ENV_CHECK').lower() == 'true':
+            print(f"WARNING: Environment variable {i} not set")
+        else:
+            envs_notset.append(i)
 
 if len(envs_notset) > 0:
     raise Exception(f"Environment variables not set: {envs_notset}")
 
 # Typecasts
-env['DJ_DEBUG'] = env['DJ_DEBUG'].lower() == 'true'
+if hasattr(env, 'DJ_DEBUG'):
+    env['DJ_DEBUG'] = env['DJ_DEBUG'].lower() == 'true'

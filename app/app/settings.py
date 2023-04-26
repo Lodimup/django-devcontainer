@@ -22,10 +22,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env['DJ_SECRET_KEY']
+SECRET_KEY = env.get('DJ_SECRET_KEY', 'not-safe-%u+@3$+4@)xozo4_-rv0wlk**5+l)((td@qlf2sz9&3h0h%w2h')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env['DJ_DEBUG']
+DEBUG = env.get('DJ_DEBUG', False)
 
 ALLOWED_HOSTS = []
 
@@ -79,11 +79,11 @@ WSGI_APPLICATION = "app.wsgi.application"
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': env['DJ_POSTGRES_DB'],
-        'USER': env['DJ_POSTGRES_USER'],
-        'PASSWORD': env['DJ_POSTGRES_PASSWORD'],
-        'HOST': env['DJ_POSTGRES_HOST'],
-        'PORT': env['DJ_POSTGRES_PORT'],
+        'NAME': env.get('DJ_POSTGRES_DB', 'postgres'),
+        'USER': env.get('DJ_POSTGRES_USER', 'postgres'),
+        'PASSWORD': env.get('DJ_POSTGRES_PASSWORD', 'postgres'),
+        'HOST': env.get('DJ_POSTGRES_HOST', 'postgres'),
+        'PORT': env.get('DJ_POSTGRES_PORT', '5432'),
     }
 }
 
@@ -123,7 +123,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = "static/"
-STATIC_ROOT = os.path.join("BASE_DIR", "staticfiles")
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
@@ -131,14 +131,21 @@ STATIC_ROOT = os.path.join("BASE_DIR", "staticfiles")
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # Celery
-CELERY_BROKER_URL = env['DJ_CELERY_BROKER_URL']
-CELERY_RESULT_BACKEND = env['DJ_CELERY_RESULT_BACKEND']
+CELERY_BROKER_URL = env.get('DJ_CELERY_BROKER_URL', 'redis://redis:6379/0')
+CELERY_RESULT_BACKEND = env.get('DJ_CELERY_RESULT_BACKEND', 'redis://redis:6379/1')
 CELERY_INCLUDE = []  # add 'app.tasks' here for auto task discovery
 
 # Cache
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.redis.RedisCache',
-        'LOCATION': env['DJ_REDIS_CACHE_URL'],
+        'LOCATION': env.get('DJ_REDIS_CACHE_URL', 'redis://redis:6379/2'),
     }
+}
+
+# Storages configs
+STORAGES = {
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
 }
