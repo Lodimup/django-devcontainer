@@ -37,5 +37,5 @@ if len(envs_notset) > 0:
 # Typecasts
 if env.get('DJ_DEBUG') is not None:
     env['DJ_DEBUG'] = env['DJ_DEBUG'].lower() == 'true'
-if env.get('DJ_ALLOWED_HOSTS'):
+if env.get('DJ_ALLOWED_HOSTS') is not None:
     env['DJ_ALLOWED_HOSTS'] = env['DJ_ALLOWED_HOSTS'].split(',')
