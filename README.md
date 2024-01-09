@@ -1,3 +1,6 @@
+# Deprecated
+see: https://github.com/Lodimup/next-django
+
 # Django Devcontainer Base Repository
 A ready to use devcontainer for Django development.
 This repository contains a base devcontainer for Django development.  
